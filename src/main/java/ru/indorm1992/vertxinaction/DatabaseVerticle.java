@@ -35,7 +35,7 @@ public class DatabaseVerticle extends AbstractVerticle {
             .setDatabase("postgres")
             .setPassword("12345"), new PoolOptions());
 
-        vertx.eventBus().consumer("temperature.updates", this::recordTemperature);
+        //vertx.eventBus().consumer("temperature.updates", this::recordTemperature);
 
         Router router = Router.router(vertx);
         router.get("/data").handler(this::getAllData);
@@ -53,7 +53,9 @@ public class DatabaseVerticle extends AbstractVerticle {
     }
 
     private void getLastFiveMinutes(RoutingContext context) {
-        //TODO
+        //todo
+        context.response()
+            .end(new JsonObject().put("message", "this is last 5 minutes data").encode());
     }
 
     private void getData(RoutingContext context) {
